@@ -1,1 +1,335 @@
-<h1>blog 2</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Machine Learning — MyMiniCloud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+  
+    :root{
+      --bg: #f5f5f7;
+      --surface: rgba(255,255,255,0.82);
+      --card: #ffffff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 18px 50px rgba(0,0,0,0.06);
+      --shadow-hover: 0 24px 60px rgba(0,0,0,0.10);
+      --accent: #0071e3;
+      --accent-hover: #005bb5;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1120px;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+    body{
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.95), transparent 36%),
+        linear-gradient(180deg, #f8f8fa 0%, #f5f5f7 100%);
+      color:var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      min-height:100vh;
+      line-height:1.7;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ width:min(var(--max), calc(100% - 32px)); margin:0 auto; }
+    .topbar{
+      position:sticky; top:0; z-index:100;
+      backdrop-filter:saturate(180%) blur(18px);
+      background:rgba(245,245,247,0.78);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:24px;
+      padding:18px 0;
+    }
+    .brand{ font-size:1.05rem; font-weight:700; letter-spacing:-0.03em; white-space:nowrap; }
+    .brand span{ color:var(--accent); }
+    .nav ul{
+      list-style:none; display:flex; align-items:center; gap:28px; flex-wrap:wrap; justify-content:flex-end;
+    }
+    .nav a.link{
+      color:var(--muted); font-size:0.92rem; font-weight:500; transition:color .2s ease, opacity .2s ease;
+    }
+    .nav a.link:hover, .nav a.link.active{ color:var(--text); }
+    .nav .pill{
+      padding:10px 14px; border:1px solid var(--border); border-radius:999px; background:rgba(255,255,255,0.62);
+    }
+    .hero{ padding:72px 0 28px; }
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.76));
+      border:1px solid var(--border); border-radius:var(--radius-xl);
+      box-shadow:var(--shadow); overflow:hidden; position:relative;
+    }
+    .hero-card::after{
+      content:""; position:absolute; inset:auto -120px -130px auto; width:320px; height:320px;
+      background:radial-gradient(circle, rgba(0,113,227,0.12), transparent 68%); pointer-events:none;
+    }
+    .hero-inner{ padding:48px; display:grid; grid-template-columns:1.2fr 0.8fr; gap:28px; align-items:center; }
+    .eyebrow{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:0.82rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:16px;
+    }
+    .hero h1{
+      font-size:clamp(2.5rem, 4.8vw, 4.6rem); line-height:1.02; letter-spacing:-0.07em;
+      margin-bottom:18px; font-weight:800; max-width:12ch;
+    }
+    .hero p{
+      max-width:700px; font-size:1.06rem; color:var(--muted); letter-spacing:-0.01em;
+    }
+    .hero-meta{
+      display:flex; gap:12px; flex-wrap:wrap; margin-top:22px;
+      color:var(--muted); font-size:0.92rem;
+    }
+    .meta-chip{
+      padding:10px 14px; border:1px solid var(--border); border-radius:999px; background:#fff;
+    }
+    .hero-visual{
+      min-height:290px; border-radius:24px;
+      background:linear-gradient(135deg, #eef4ff 0%, #f7f8fc 45%, #ffffff 100%);
+      border:1px solid rgba(0,0,0,0.05);
+      display:flex; align-items:center; justify-content:center; font-size:5.2rem;
+      position:relative; overflow:hidden;
+    }
+    .hero-visual::before{
+      content:""; position:absolute; inset:16px; border:1px solid rgba(255,255,255,0.9); border-radius:22px;
+    }
+    .hero-visual .label{
+      position:absolute; bottom:18px; left:18px; background:rgba(255,255,255,0.82);
+      border:1px solid rgba(0,0,0,0.06); padding:10px 14px; border-radius:999px;
+      font-size:0.86rem; color:var(--muted); backdrop-filter: blur(10px);
+    }
+    .section{ padding:18px 0 22px; }
+    .section-head{
+      display:flex; align-items:end; justify-content:space-between; gap:16px; margin:14px 0 18px;
+    }
+    .section-head h2{
+      font-size:1.35rem; letter-spacing:-0.04em; margin-bottom:4px;
+    }
+    .section-head p{ color:var(--muted); font-size:0.95rem; max-width:680px; }
+    .grid{ display:grid; grid-template-columns:repeat(12,1fr); gap:20px; }
+    .card{
+      grid-column:span 12;
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
+      box-shadow:var(--shadow); overflow:hidden;
+    }
+    .card-inner{ padding:28px; }
+    .card h3{
+      font-size:1.18rem; line-height:1.35; letter-spacing:-0.04em; margin-bottom:12px;
+    }
+    .card p{
+      color:var(--muted); font-size:0.98rem; line-height:1.82; margin-bottom:12px;
+    }
+    .list{
+      margin-top:12px; padding-left:20px; color:var(--muted);
+    }
+    .list li{ margin:8px 0; }
+    .two-col{
+      grid-column:span 12;
+      display:grid; grid-template-columns:1fr 1fr; gap:20px;
+    }
+    .mini{
+      background:linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,255,255,0.82));
+      border:1px solid var(--border); border-radius:var(--radius-lg); box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .mini h3{ margin-bottom:12px; }
+    .mini p{ color:var(--muted); font-size:0.97rem; line-height:1.8; }
+    .mini ul{ color:var(--muted); padding-left:20px; margin-top:10px; }
+    .mini li{ margin:8px 0; }
+    .callout{
+      grid-column:span 12;
+      border-radius:var(--radius-xl);
+      background:linear-gradient(135deg, rgba(0,113,227,0.10), rgba(0,113,227,0.04));
+      border:1px solid rgba(0,113,227,0.12);
+      padding:30px;
+      box-shadow:var(--shadow);
+    }
+    .callout h3{ font-size:1.22rem; margin-bottom:10px; }
+    .callout p{ color:var(--muted); max-width:900px; }
+    .closing{
+      padding:0 0 70px;
+    }
+    .closing-box{
+      background:linear-gradient(180deg, rgba(255,255,255,0.94), rgba(255,255,255,0.82));
+      border:1px solid var(--border); border-radius:var(--radius-xl); box-shadow:var(--shadow);
+      padding:30px 34px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; padding:12px 18px;
+      border-radius:999px; font-weight:600; font-size:0.94rem; border:1px solid var(--border);
+      background:#fff; color:var(--text); transition:transform .2s ease, background .2s ease, border-color .2s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{ transform:translateY(-1px); }
+    .btn.primary{ background:var(--accent); color:#fff; border-color:transparent; }
+    .btn.primary:hover{ background:var(--accent-hover); }
+    footer{
+      border-top:1px solid rgba(0,0,0,0.06);
+      padding:24px 0 38px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+    .footer-inner{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center; }
+    .footer-inner a{ color:var(--text); font-weight:600; }
+    @media (max-width: 960px){
+      .hero-inner{ grid-template-columns:1fr; }
+      .two-col{ grid-template-columns:1fr; }
+      .card h3{ font-size:1.12rem; }
+    }
+    @media (max-width: 720px){
+      .nav{ flex-direction:column; align-items:flex-start; }
+      .nav ul{ justify-content:flex-start; gap:14px; }
+      .hero{ padding-top:44px; }
+      .hero-inner{ padding:28px; }
+      .section-head{ flex-direction:column; align-items:flex-start; }
+      .card-inner{ padding:22px; }
+      .closing-box{ padding:24px; }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">My<span>Mini</span>Cloud</div>
+      <ul>
+        <li><a class="link" href="/">Home</a></li>
+        <li><a class="link" href="/blog/">Blog</a></li>
+        <li><a class="link pill" href="http://localhost:8085/hello" target="_blank" rel="noreferrer">API</a></li>
+        <li><a class="link pill" href="http://localhost:9001" target="_blank" rel="noreferrer">Storage</a></li>
+        <li><a class="link pill" href="http://localhost:3000" target="_blank" rel="noreferrer">Monitor</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="hero-inner">
+            <div>
+              <div class="eyebrow">ML foundations</div>
+              <h1>Machine Learning: turning data into predictions</h1>
+              <p>A detailed guide to machine learning, including its workflow, major algorithm families, evaluation methods, and practical use cases.</p>
+              <div class="hero-meta">
+                <span class="meta-chip">English article</span>
+                <span class="meta-chip">Apple-inspired minimal layout</span>
+                <span class="meta-chip">Detailed & practical</span>
+              </div>
+            </div>
+            <div class="hero-visual" aria-hidden="true">
+              <div>📈</div>
+              <div class="label">ML workflow</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Complete guide</h2>
+            <p>Structured content with clear explanations, practical examples, and specific takeaways.</p>
+          </div>
+          <p>Read the complete ML guide</p>
+        </div>
+
+        <div class="grid">
+          
+            <article class="card">
+              <div class="card-inner">
+                <h3>What Machine Learning is</h3>
+                <p>Machine Learning (ML) is a subset of Artificial Intelligence that allows systems to learn patterns from data instead of being explicitly programmed with every rule. The model improves its performance by observing examples and adjusting its internal parameters.</p><p>ML is especially useful when the problem is too complex to solve with a fixed rule set, or when the environment changes over time.</p>
+                
+              </div>
+            </article>
+            
+
+            <div class="two-col">
+              <div class="mini">
+                <h3>The ML workflow</h3>
+                <p>A standard machine learning pipeline starts with data collection, followed by preprocessing, feature engineering, model training, validation, testing, and deployment.</p><p>Each stage matters. If the data is poor, the model will usually be poor too, even if the algorithm itself is strong.</p>
+                <ul class='list'><li>Collect data</li><li>Clean and normalize it</li><li>Split into train/validation/test sets</li><li>Train candidate models</li><li>Measure results and iterate</li></ul>
+              </div>
+              <div class="mini">
+                <h3>Types of ML</h3>
+                <p>Supervised learning learns from labeled examples, such as emails marked spam or not spam. Unsupervised learning finds hidden structure in unlabeled data, such as customer segments.</p><p>Reinforcement learning learns through trial and error, receiving rewards or penalties based on its actions.</p>
+                <ul class='list'><li>Supervised learning</li><li>Unsupervised learning</li><li>Semi-supervised learning</li><li>Reinforcement learning</li></ul>
+              </div>
+            </div>
+            
+
+            <aside class="callout">
+              <h3>Why features and data quality matter</h3>
+              <p>In machine learning, the input representation often determines the outcome. Good feature engineering can significantly improve performance because it helps the model focus on the most useful signals.</p><p>Data quality is equally important. Missing values, outliers, noisy labels, or unbalanced classes can reduce accuracy and lead to unstable predictions.</p>
+            </aside>
+            
+
+            <div class="two-col">
+              <div class="mini">
+                <h3>Common algorithms</h3>
+                <p>Popular ML algorithms include linear regression, logistic regression, decision trees, random forests, support vector machines, gradient boosting, k-nearest neighbors, and clustering methods such as k-means.</p><p>The choice depends on the task, the size of the dataset, the number of features, interpretability requirements, and the available compute resources.</p>
+                <ul class='list'><li>Regression for prediction</li><li>Classification for labels</li><li>Clustering for grouping</li><li>Ensembles for stronger accuracy</li></ul>
+              </div>
+              <div class="mini">
+                <h3>Metrics and evaluation</h3>
+                <p>A model is only useful if it performs well on unseen data. That is why evaluation metrics are critical. Classification tasks often use accuracy, precision, recall, F1-score, and ROC-AUC.</p><p>Regression tasks often use MAE, MSE, and RMSE. In many real projects, the business goal matters more than a single score.</p>
+                <ul class='list'><li>Accuracy and F1-score</li><li>Precision and recall</li><li>MAE / MSE / RMSE</li><li>Cross-validation</li></ul>
+              </div>
+            </div>
+            
+
+            <article class="card">
+              <div class="card-inner">
+                <h3>Where machine learning is used today</h3>
+                <p>ML powers spam filters, fraud detection, recommendation engines, demand forecasting, image classification, and predictive maintenance. It is one of the most practical and widely deployed AI technologies.</p><p>The reason ML is so valuable is that it turns historical data into predictions, and those predictions can improve decisions in almost any industry.</p>
+                
+              </div>
+            </article>
+            
+
+            <article class="card">
+              <div class="card-inner">
+                <h3>Limits you should always keep in mind</h3>
+                <p>Machine learning does not understand the world in the human sense. It learns statistical patterns, which means it can fail when the data changes, the environment shifts, or the training examples are biased.</p><p>Good ML work therefore includes monitoring, retraining, and careful validation after deployment.</p>
+                
+              </div>
+            </article>
+            
+        </div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div class="wrap">
+        <div class="closing-box">
+          <div>
+            <h3 style="font-size:1.32rem;letter-spacing:-0.04em;margin-bottom:6px;">Keep exploring the series</h3>
+            <p style="color:var(--muted);max-width:760px;">These three pages are written as a connected learning path: Artificial Intelligence → Machine Learning → Deep Learning.</p>
+          </div>
+          <a class="btn primary" href="./">Back to Blog Index</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>Machine Learning — MyMiniCloud © 2026</p>
+      <p><a href="../">← Return to homepage</a></p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,2 +1,639 @@
-<h1>MyMiniCloud Blog</h1>
-<a href="../">Back</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – MyMiniCloud</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 18px 50px rgba(0,0,0,0.06);
+      --shadow-hover: 0 24px 60px rgba(0,0,0,0.10);
+      --accent: #0071e3;
+      --accent-hover: #005bb5;
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --max: 1200px;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    html{ scroll-behavior:smooth; }
+
+    body{
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.9), transparent 42%),
+        var(--bg);
+      color:var(--text);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      min-height:100vh;
+      line-height:1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+
+    .wrap{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:100;
+      backdrop-filter:saturate(180%) blur(18px);
+      background:rgba(245,245,247,0.78);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      padding:18px 0;
+    }
+
+    .brand{
+      font-size:1.05rem;
+      font-weight:700;
+      letter-spacing:-0.03em;
+      white-space:nowrap;
+    }
+
+    .brand span{ color:var(--accent); }
+
+    .nav ul{
+      list-style:none;
+      display:flex;
+      align-items:center;
+      gap:28px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav a.link{
+      color:var(--muted);
+      font-size:0.92rem;
+      font-weight:500;
+      transition:color .2s ease;
+    }
+
+    .nav a.link:hover,
+    .nav a.link.active{ color:var(--text); }
+
+    .nav .pill{
+      padding:10px 14px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background:rgba(255,255,255,0.6);
+    }
+
+    .hero{
+      padding:72px 0 28px;
+    }
+
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.75));
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:44px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:auto -120px -120px auto;
+      width:280px;
+      height:280px;
+      background:radial-gradient(circle, rgba(0,113,227,0.12), transparent 70%);
+      pointer-events:none;
+    }
+
+    .breadcrumb{
+      font-size:0.86rem;
+      color:var(--muted);
+      margin-bottom:14px;
+      letter-spacing:-0.01em;
+    }
+
+    .breadcrumb a{ color:var(--text); }
+
+    .hero h1{
+      font-size:clamp(2.2rem, 4vw, 4.2rem);
+      line-height:1.05;
+      letter-spacing:-0.06em;
+      max-width:11ch;
+      margin-bottom:18px;
+      font-weight:800;
+    }
+
+    .hero p{
+      max-width:720px;
+      font-size:1.06rem;
+      color:var(--muted);
+      letter-spacing:-0.01em;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-top:26px;
+    }
+
+    .search{
+      flex:1 1 320px;
+      min-width:240px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      background:rgba(255,255,255,0.85);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:14px 18px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.04);
+    }
+
+    .search input{
+      border:none;
+      outline:none;
+      background:transparent;
+      width:100%;
+      font:inherit;
+      color:var(--text);
+    }
+
+    .search input::placeholder{ color:#9a9aa1; }
+
+    .chips{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .chip{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,0.75);
+      color:var(--muted);
+      padding:10px 14px;
+      border-radius:999px;
+      font-size:0.9rem;
+      font-weight:500;
+      transition:transform .2s ease, color .2s ease, background .2s ease;
+    }
+
+    .chip:hover,
+    .chip.active{
+      background:#fff;
+      color:var(--text);
+      transform:translateY(-1px);
+    }
+
+    .section{
+      padding:20px 0 72px;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:16px;
+      margin:18px 0 20px;
+    }
+
+    .section-head h2{
+      font-size:1.35rem;
+      letter-spacing:-0.04em;
+    }
+
+    .section-head p{
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:22px;
+    }
+
+    .card{
+      grid-column:span 4;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius-lg);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      display:flex;
+      flex-direction:column;
+      min-height:100%;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--shadow-hover);
+      border-color:rgba(0,113,227,0.20);
+    }
+
+    .thumb{
+      aspect-ratio:16/10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .thumb::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg, rgba(0,0,0,0.03), rgba(255,255,255,0.08));
+    }
+
+    .thumb.ai{
+      background:linear-gradient(135deg, #eef4ff 0%, #dce9ff 100%);
+    }
+
+    .thumb.ml{
+      background:linear-gradient(135deg, #eef8f0 0%, #dff1e4 100%);
+    }
+
+    .thumb.dl{
+      background:linear-gradient(135deg, #f4efff 0%, #e7dcff 100%);
+    }
+
+    .thumb .icon{
+      position:relative;
+      font-size:4rem;
+      filter:saturate(0.92);
+    }
+
+    .content{
+      padding:24px;
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      flex:1;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      width:max-content;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:0.76rem;
+      font-weight:700;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      border:1px solid var(--border);
+      color:var(--text);
+      background:#fafafa;
+    }
+
+    .tag.ai{ background:#eef4ff; }
+    .tag.ml{ background:#eef8f0; }
+    .tag.dl{ background:#f4efff; }
+
+    .card h3{
+      font-size:1.2rem;
+      line-height:1.35;
+      letter-spacing:-0.04em;
+      font-weight:700;
+    }
+
+    .card p{
+      color:var(--muted);
+      font-size:0.97rem;
+      line-height:1.75;
+    }
+
+    .meta{
+      margin-top:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      padding-top:18px;
+      border-top:1px solid rgba(0,0,0,0.06);
+      color:var(--muted);
+      font-size:0.86rem;
+    }
+
+    .read{
+      color:var(--accent);
+      font-weight:600;
+      white-space:nowrap;
+    }
+
+    .featured{
+      grid-column:span 12;
+      display:grid;
+      grid-template-columns:1.15fr 0.85fr;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      min-height:420px;
+    }
+
+    .featured .copy{
+      padding:42px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:16px;
+    }
+
+    .featured h3{
+      font-size:clamp(1.8rem, 3vw, 3rem);
+      line-height:1.08;
+      letter-spacing:-0.06em;
+    }
+
+    .featured .visual{
+      min-height:320px;
+      background:linear-gradient(135deg, #f3f3f7, #e6eef9);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:6rem;
+      position:relative;
+    }
+
+    .featured .visual::after{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border:1px solid rgba(255,255,255,0.7);
+      border-radius:24px;
+      pointer-events:none;
+    }
+
+    .cta-row{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:600;
+      font-size:0.94rem;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      transition:transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+
+    .btn:hover{ transform:translateY(-1px); }
+
+    .btn.primary{
+      background:var(--accent);
+      color:#fff;
+      border-color:transparent;
+    }
+
+    .btn.primary:hover{ background:var(--accent-hover); }
+
+    .newsletter{
+      padding:0 0 68px;
+    }
+
+    .newsletter-box{
+      background:linear-gradient(180deg, rgba(255,255,255,0.92), rgba(255,255,255,0.8));
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      box-shadow:var(--shadow);
+      padding:36px 40px;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .newsletter-box h3{
+      font-size:1.4rem;
+      letter-spacing:-0.04em;
+      margin-bottom:6px;
+    }
+
+    .newsletter-box p{ color:var(--muted); max-width:640px; }
+
+    footer{
+      border-top:1px solid rgba(0,0,0,0.06);
+      padding:28px 0 40px;
+      color:var(--muted);
+      font-size:0.92rem;
+    }
+
+    .footer-inner{
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .footer-inner a{
+      color:var(--text);
+      font-weight:600;
+    }
+
+    @media (max-width: 960px){
+      .featured{ grid-template-columns:1fr; }
+      .card{ grid-column:span 6; }
+      .hero-card{ padding:32px; }
+      .featured .copy{ padding:32px; }
+    }
+
+    @media (max-width: 720px){
+      .nav{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .nav ul{
+        justify-content:flex-start;
+        gap:14px;
+      }
+
+      .hero{ padding-top:44px; }
+      .hero-card{ padding:26px; }
+
+      .section-head{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .card{ grid-column:span 12; }
+      .newsletter-box{ padding:26px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand">Mind<span>Machines</span></div>
+      <ul>
+        <li><a class="link" href="../">Home</a></li>
+        <li><a class="link active" href="#">Blog</a></li>
+        <li><a class="link pill" href="http://localhost:8085/hello" target="_blank" rel="noreferrer">API</a></li>
+        <li><a class="link pill" href="http://localhost:9001" target="_blank" rel="noreferrer">Storage</a></li>
+        <li><a class="link pill" href="http://localhost:3000" target="_blank" rel="noreferrer">Monitor</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-card">
+          <div class="breadcrumb"><a href="/">Home</a> / Blog</div>
+          <h1>Insights on AI, ML, and DL.</h1>
+          <p>A clean, Apple-inspired blog layout for reading about Artificial Intelligence, Machine Learning, and Deep Learning with clarity, spacing, and strong visual hierarchy.</p>
+
+          <div class="toolbar" aria-label="Search and filter posts">
+            <label class="search">
+              <span style="color:var(--muted);font-size:0.95rem;">⌕</span>
+              <input type="text" placeholder="Search articles..." />
+            </label>
+
+            <div class="chips">
+              <a href="#" class="chip active">All</a>
+              <a href="#" class="chip">AI</a>
+              <a href="#" class="chip">ML</a>
+              <a href="#" class="chip">DL</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Featured article</h2>
+            <p>The main article is now aligned with the new topic structure.</p>
+          </div>
+          <p>3 posts · updated recently</p>
+        </div>
+
+        <article class="featured">
+          <div class="copy">
+            <span class="tag ai">Featured · Artificial Intelligence</span>
+            <h3>Artificial Intelligence: Foundations, Applications, and Impact</h3>
+            <p>This article explains what Artificial Intelligence is, how it works at a conceptual level, where it is used in daily life, and why it matters for the future of software, business, and society.</p>
+            <div class="meta" style="border-top:none;padding-top:0;">
+              <span>📅 12/04/2026 · ⏱ 9 min read · 👤 MyMiniCloud</span>
+            </div>
+            <div class="cta-row">
+              <a class="btn primary" href="./blog1.html">Read article</a>
+              <a class="btn" href="#latest">View all posts</a>
+            </div>
+          </div>
+          <div class="visual" aria-hidden="true">🧠</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="latest">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>Latest posts</h2>
+            <p>Three detailed articles, each mapped to one major topic.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <a href="./blog1.html" class="card">
+            <div class="thumb ai"><div class="icon">🧠</div></div>
+            <div class="content">
+              <span class="tag ai">Artificial Intelligence</span>
+              <h3>Artificial Intelligence: Foundations, Applications, and Impact</h3>
+              <p>Learn the core idea of AI, the differences between narrow and general intelligence, real-world use cases, and the benefits and risks of intelligent systems.</p>
+              <div class="meta">
+                <span>12/04/2026 · 9 min read</span>
+                <span class="read">Read →</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="./blog2.html" class="card">
+            <div class="thumb ml"><div class="icon">📈</div></div>
+            <div class="content">
+              <span class="tag ml">Machine Learning</span>
+              <h3>Machine Learning: Concepts, Workflow, and Practical Examples</h3>
+              <p>Understand supervised, unsupervised, and reinforcement learning, how training works, and how models learn patterns from data.</p>
+              <div class="meta">
+                <span>10/04/2026 · 8 min read</span>
+                <span class="read">Read →</span>
+              </div>
+            </div>
+          </a>
+
+          <a href="./blog3.html" class="card">
+            <div class="thumb dl"><div class="icon">🕸️</div></div>
+            <div class="content">
+              <span class="tag dl">Deep Learning</span>
+              <h3>Deep Learning: Neural Networks Behind Modern AI</h3>
+              <p>Explore neural networks, layers, activation functions, backpropagation, and why deep learning powers vision, language, and generative models.</p>
+              <div class="meta">
+                <span>08/04/2026 · 10 min read</span>
+                <span class="read">Read →</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="wrap">
+        <div class="newsletter-box">
+          <div>
+            <h3>Subscribe to new insights</h3>
+            <p>A small newsletter block adds a more polished blog feel and makes the page look closer to a real modern publication.</p>
+          </div>
+          <a class="btn primary" href="mailto:hello@myminicloud.com">Subscribe</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>MyMiniCloud © 2026</p>
+      <p><a href="../">← Back to Home</a> · Student blog about AI, ML, and DL</p>
+    </div>
+  </footer>
+
+</body>
+</html>
