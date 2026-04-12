@@ -1,98 +1,439 @@
 <!DOCTYPE html>
 <html lang="en">
-    <!-- HEAD -->
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MyMiniCloud</title>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyMiniCloud</title>
 
-        <style>
-            :root {
-                --bg: #0a0e1a;
-                --surface: #111827;
-                --accent: #00e5ff;
-                --accent2: #7c3aed;
-                --text: #e2e8f0;
-                --muted: #64748b;
-                --card: #1e293b;
-                --border: #334155;
+    <style>
+        :root {
+            --bg: #f5f5f7;
+            --surface: rgba(255, 255, 255, 0.72);
+            --surface-solid: #ffffff;
+            --text: #1d1d1f;
+            --muted: #6e6e73;
+            --border: rgba(0, 0, 0, 0.08);
+            --shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.1);
+            --accent: #0071e3;
+            --radius: 22px;
+            --max-width: 1120px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background:
+                radial-gradient(circle at top, rgba(255,255,255,0.95), rgba(245,245,247,0.95)),
+                var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(100% - 32px, var(--max-width));
+            margin: 0 auto;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(18px);
+            background: rgba(245, 245, 247, 0.75);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-inner {
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+        }
+
+        .logo {
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .hero {
+            padding: 72px 0 36px;
+        }
+
+        .hero-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: calc(var(--radius) + 8px);
+            box-shadow: var(--shadow);
+            padding: 48px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hero-card::after {
+            content: "";
+            position: absolute;
+            inset: auto -120px -120px auto;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,113,227,0.15), transparent 70%);
+            pointer-events: none;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 14px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4vw, 4.4rem);
+            line-height: 1.05;
+            letter-spacing: -0.05em;
+            max-width: 10ch;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.08rem;
+            color: var(--muted);
+            max-width: 60ch;
+            margin-bottom: 28px;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 113, 227, 0.22);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid var(--border);
+            color: var(--text);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .section {
+            padding: 30px 0 72px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 22px;
+        }
+
+        .section-header h2 {
+            font-size: 1.8rem;
+            letter-spacing: -0.04em;
+        }
+
+        .section-header a {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 22px;
+        }
+
+        .blog-card {
+            background: var(--surface-solid);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(0, 113, 227, 0.18);
+        }
+
+        .blog-thumb {
+            height: 180px;
+            background:
+                linear-gradient(135deg, rgba(0,113,227,0.95), rgba(88,86,214,0.95));
+            position: relative;
+        }
+
+        .blog-thumb::after {
+            content: "";
+            position: absolute;
+            inset: 22px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.18);
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(6px);
+        }
+
+        .blog-content {
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .meta {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 5px 10px;
+            border-radius: 999px;
+            background: rgba(0, 113, 227, 0.08);
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .blog-card h3 {
+            font-size: 1.25rem;
+            line-height: 1.25;
+            letter-spacing: -0.03em;
+        }
+
+        .blog-card p {
+            color: var(--muted);
+            font-size: 0.98rem;
+        }
+
+        .read-more {
+            margin-top: 6px;
+            font-weight: 600;
+            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        footer {
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 28px 0 40px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        footer span {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        @media (max-width: 960px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
 
-            nav {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                background-color: rgba(10, 14, 26, 0.9);
+            .hero-card {
+                padding: 36px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .nav-inner {
+                height: auto;
+                padding: 16px 0;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                gap: 16px;
+                flex-wrap: wrap;
+            }
+
+            .hero {
+                padding-top: 36px;
+            }
+
+            .hero-card {
+                padding: 26px;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                flex-direction: column;
             }
 
             .blog-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 1.5rem;
+                grid-template-columns: 1fr;
             }
+        }
+    </style>
+</head>
 
-            .blog-card {
-                background: var(--card);
-                border: 1px, solid var(--border);
-                border-radius: 1rem;
-                overflow: hidden;
-                transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
-                text-decoration: none;
-                color: inherit;
-                display: block;
-            }
-
-            .blog-card:hover {
-                transform: translateY(-5px);
-                border-color: var(--accent);
-                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
-            }
-        </style>
-
-    </head>
-
-    <!-- BODY -->
-    <body>
-        <!-- NAV -->
-        <nav>
-            <div class="logo">My<span>Mini</span>Cloud</div>
-            <ul>
-                <li><a href="">HOME</a></li>
-                <li><a href="blog/">BLOG</a></li>
-                <li></li>
-                <li></li>
-                <li></li>
+<body>
+    <nav>
+        <div class="container nav-inner">
+            <div class="logo">Mind<span>Machines</span></div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="blog/">Blog</a></li>
+                <li><a href="#posts">Posts</a></li>
             </ul>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- SECTION -->
-        <section class="section">
-            <div class="section-header">
-                <h2>Blog Posts</h2>
-                <div class="line"></div>
-                <a href="blog/">See All</a>
-            </div>
-
-            <div class="blog-grid">
-                <a href="blog/blog1.html" class="blog-card">
-                    <div class="blog-content">AI</div>
-                    <p>Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making</p>
-                </a>
-
-                <a href="blog/blog2.html" class="blog-card">
-                    <div class="blog-content">Machine Learning</div>
-                    <p>Machine learning (ML) is a field of study in artificial intelligence</p>
-                </a>
-
-                <a href="blog/blog3.html" class="blog-card">
-                    <div class="blog-content">Deep Learning</div>
-                    <p>Deep learning (DL) focuses on utilizing multilayered neural networks to perform tasks such as classification, regression, and representation learning.</p>
-                </a>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-card">
+                    <span class="eyebrow">AI • ML • DL</span>
+                    <h1>Clean ideas, modern insights.</h1>
+                    <p>
+                        A place to explore Artificial Intelligence, Machine Learning,
+                        and Deep Learning. Learn concepts, discover ideas, and stay
+                        updated with modern technology.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#posts" class="btn btn-primary">Explore posts</a>
+                        <a href="blog/" class="btn btn-secondary">View blog</a>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <footer>
+        <section class="section" id="posts">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Blog Posts</h2>
+                    <a href="blog/">See All</a>
+                </div>
+
+                <div class="blog-grid">
+                    <a href="blog/blog1.html" class="blog-card">
+                        <div class="blog-thumb"></div>
+                        <div class="blog-content">
+                            <div class="meta">
+                                <span class="tag">AI</span>
+                                <span>Jan 2026</span>
+                            </div>
+                            <h3>Artificial Intelligence</h3>
+                            <p>
+                                Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making.
+                            </p>
+                            <span class="read-more">Read more →</span>
+                        </div>
+                    </a>
+
+                    <a href="blog/blog2.html" class="blog-card">
+                        <div class="blog-thumb"></div>
+                        <div class="blog-content">
+                            <div class="meta">
+                                <span class="tag">ML</span>
+                                <span>Jan 2026</span>
+                            </div>
+                            <h3>Machine Learning</h3>
+                            <p>
+                                Machine learning (ML) is a field of study in artificial intelligence.
+                            </p>
+                            <span class="read-more">Read more →</span>
+                        </div>
+                    </a>
+
+                    <a href="blog/blog3.html" class="blog-card">
+                        <div class="blog-thumb"></div>
+                        <div class="blog-content">
+                            <div class="meta">
+                                <span class="tag">DL</span>
+                                <span>Jan 2026</span>
+                            </div>
+                            <h3>Deep Learning</h3>
+                            <p>
+                                Deep learning (DL) focuses on utilizing multilayered neural networks to perform tasks such as classification, regression, and representation learning.
+                            </p>
+                            <span class="read-more">Read more →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
             <p>MiniCloud © 2026 — Xây dựng bởi <span>Phan Trí Hiếu & Nguyễn Thái Khánh Nam</span></p>
-        </footer>
-    </body>
+        </div>
+    </footer>
+</body>
 </html>
