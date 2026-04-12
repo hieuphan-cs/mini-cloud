@@ -1,9 +1,98 @@
 <!DOCTYPE html>
-<html>
-<head><title>MyMiniCloud - Home</title></head>
-<body>
-    <h1>MyMiniCloud - Home</h1>
-    <p>Chào mừng đến hệ thống MiniCloud!</p>
-    <a href="/blog/">Xem Blog</a>
-</body>
+<html lang="en">
+    <!-- HEAD -->
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MyMiniCloud</title>
+
+        <style>
+            :root {
+                --bg: #0a0e1a;
+                --surface: #111827;
+                --accent: #00e5ff;
+                --accent2: #7c3aed;
+                --text: #e2e8f0;
+                --muted: #64748b;
+                --card: #1e293b;
+                --border: #334155;
+            }
+
+            nav {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: rgba(10, 14, 26, 0.9);
+            }
+
+            .blog-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1.5rem;
+            }
+
+            .blog-card {
+                background: var(--card);
+                border: 1px, solid var(--border);
+                border-radius: 1rem;
+                overflow: hidden;
+                transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+                text-decoration: none;
+                color: inherit;
+                display: block;
+            }
+
+            .blog-card:hover {
+                transform: translateY(-5px);
+                border-color: var(--accent);
+                box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+            }
+        </style>
+
+    </head>
+
+    <!-- BODY -->
+    <body>
+        <!-- NAV -->
+        <nav>
+            <div class="logo">My<span>Mini</span>Cloud</div>
+            <ul>
+                <li><a href="">HOME</a></li>
+                <li><a href="blog/">BLOG</a></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </nav>
+
+        <!-- SECTION -->
+        <section class="section">
+            <div class="section-header">
+                <h2>Blog Posts</h2>
+                <div class="line"></div>
+                <a href="blog/">See All</a>
+            </div>
+
+            <div class="blog-grid">
+                <a href="blog/blog1.html" class="blog-card">
+                    <div class="blog-content">AI</div>
+                    <p>Artificial intelligence (AI) is the capability of computational systems to perform tasks typically associated with human intelligence, such as learning, reasoning, problem-solving, perception, and decision-making</p>
+                </a>
+
+                <a href="blog/blog2.html" class="blog-card">
+                    <div class="blog-content">Machine Learning</div>
+                    <p>Machine learning (ML) is a field of study in artificial intelligence</p>
+                </a>
+
+                <a href="blog/blog3.html" class="blog-card">
+                    <div class="blog-content">Deep Learning</div>
+                    <p>Deep learning (DL) focuses on utilizing multilayered neural networks to perform tasks such as classification, regression, and representation learning.</p>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>MiniCloud © 2026 — Xây dựng bởi <span>Phan Trí Hiếu & Nguyễn Thái Khánh Nam</span></p>
+        </footer>
+    </body>
 </html>
