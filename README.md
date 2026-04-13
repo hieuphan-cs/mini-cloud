@@ -1,7 +1,7 @@
 # Mini-Cloud
 
 # Requirements
-1. web-frontend-serverr
+## web-frontend-serverr
 
 test command:
 curl.exe -I http://localhost:8080/ --> HTTP/1.1 200 OK
@@ -16,5 +16,20 @@ Run commands (PowerShell):
 - curl.exe http://localhost:8085/hello --> {"message":"Hello from App Server!"}
 - curl.exe http://localhost/api/hello --> {"message":"Hello from App Server!"}
 
+## Relationship Database Server
+Run commands:
+- docker run -it --rm --network cloud-net mysql:8 sh -lc "mysql -h relational-database-server -uroot -proot -e 'USE minicloud; SHOW TABLES; SELECT * FROM notes;'"
++---------------------+
+| Tables_in_minicloud |
++---------------------+
+| notes               |
++---------------------+
++----+------------------------+--------------------------------------------------------------------+---------------------+
+| id | title                  | content                                                            | created_at          |
++----+------------------------+--------------------------------------------------------------------+---------------------+
+|  1 | Hello from MariaDB!    | ?�y l� ghi ch� ??u ti�n ???c t?o t? ??ng khi kh?i ??ng container.  | 2026-04-13 06:33:29 |
+|  2 | MyMiniCloud is running | H? th?ng 9 server ?� ???c kh?i ??ng th�nh c�ng qua Docker Compose. | 2026-04-13 06:33:29 |
+|  3 | Docker + MariaDB       | Container h�a c? s? d? li?u gi�p di chuy?n v� sao l?u d? d�ng h?n. | 2026-04-13 06:33:29 |
++----+------------------------+--------------------------------------------------------------------+---------------------+
 # Additional Information
 Authors: hieu_phan, ntkn-gulu
