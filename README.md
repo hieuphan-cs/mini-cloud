@@ -37,6 +37,16 @@ Run commands:
 - Login: Đăng nhập: minioadmin / minioadmin
 - Create bucket which named "demo"
 - Upload index.html from web-frontend-server
-- 
+
+## 7. Monitering Note Exporter
+- Open: http://localhost:9090
+- Status → Targets
+ Kiểm tra: monitoring-node-exporter-server:9100 phải UP
+ Trong tab “Graph”, thử truy vấn:
+ node_cpu_seconds_total
+8️ Monitoring Grafana Dashboard
+
+
+
 # Additional Information
 Authors: hieu_phan, ntkn-gulu
