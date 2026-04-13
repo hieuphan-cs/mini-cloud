@@ -9,7 +9,8 @@ curl.exe -I http://localhost:8080/blog/ --> HTTP/1.1 200 OK
 3. application-backend-server
   - Return JSON: {"message":"Hello from App Server!"} - 100%
   - Added a new API: /student → returns a list of students from a JSON file or database - 0%
-
+**Extend**:
+run: docker exec -it relational-database-server mariadb -uroot -proot
 
 ## Application Backend Server (application-backend-server)
 Run commands (PowerShell):
