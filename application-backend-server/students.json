@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "name": "Nguyen Van A",
+    "student_code": "SV001",
+    "major": "Computer Science",
+    "gpa": 3.5,
+    "email": "nguyenvana@student.edu.vn",
+    "year": 3
+  },
+  {
+    "id": 2,
+    "name": "Tran Thi B",
+    "student_code": "SV002",
+    "major": "Information Systems",
+    "gpa": 3.7,
+    "email": "tranthib@student.edu.vn",
+    "year": 2
+  },
+  {
+    "id": 3,
+    "name": "Le Van C",
+    "student_code": "SV003",
+    "major": "Software Engineering",
+    "gpa": 3.2,
+    "email": "levanc@student.edu.vn",
+    "year": 4
+  },
+  {
+    "id": 4,
+    "name": "Pham Thi D",
+    "student_code": "SV004",
+    "major": "Data Science",
+    "gpa": 3.8,
+    "email": "phamthid@student.edu.vn",
+    "year": 3
+  },
+  {
+    "id": 5,
+    "name": "Hoang Van E",
+    "student_code": "SV005",
+    "major": "Cybersecurity",
+    "gpa": 3.4,
+    "email": "hoangvane@student.edu.vn",
+    "year": 2
+  }
+]
