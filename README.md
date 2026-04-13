@@ -1,7 +1,7 @@
 # Mini-Cloud
 
 # Requirements
-## web-frontend-serverr
+## 1. web-frontend-serverr
 
 test command:
 curl.exe -I http://localhost:8080/ --> HTTP/1.1 200 OK
@@ -31,5 +31,12 @@ Run commands:
 |  2 | MyMiniCloud is running | H? th?ng 9 server ?� ???c kh?i ??ng th�nh c�ng qua Docker Compose. | 2026-04-13 06:33:29 |
 |  3 | Docker + MariaDB       | Container h�a c? s? d? li?u gi�p di chuy?n v� sao l?u d? d�ng h?n. | 2026-04-13 06:33:29 |
 +----+------------------------+--------------------------------------------------------------------+---------------------+
+
+## 5. Object Storage Server (object-storage-server)
+- Open: http://localhost:9001
+- Login: Đăng nhập: minioadmin / minioadmin
+- Create bucket which named "demo"
+- Upload index.html from web-frontend-server
+- 
 # Additional Information
 Authors: hieu_phan, ntkn-gulu
