@@ -35,9 +35,13 @@ Then MariaDB terminal open
 - UPDATE students SET gpa = 3.9 WHERE student_id = 'SV100';
 - DELETE FROM students WHERE student_id = 'SV100';
 
-## 4. Authentication Server
+## 4. Authentication Identity Server
+### Basic
 **Open:** http://localhost:8081
-- **Username:** admin / **Password:** admin
+- Username: admin
+- Password: admin
+- Create user sv01
+### Extend
 
 ## 5. Object Storage Server (object-storage-server)
 - Open: http://localhost:9001
