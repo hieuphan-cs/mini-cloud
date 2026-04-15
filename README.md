@@ -14,8 +14,9 @@
 ## Application Backend Server
 ### Basic
 **Run:**
-curl.exe http://localhost:8085/hello --> message
-curl.exe http://localhost/api/hello --> message
+curl.exe http://localhost:8085/hello --> {"message":"Hello from App Server!"}
+curl.exe http://localhost/api/hello --> {"message":"Hello from App Server!"}
+
 ### Extend
 **Open:** http://localhost/api/student --> json
 
