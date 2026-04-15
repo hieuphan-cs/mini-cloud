@@ -39,6 +39,25 @@ Run commands:
 - Create bucket which named "demo"
 - Upload index.html from web-frontend-server
 
+## 6. Internal DNS Server
+Run: docker run --rm --network cloud-net alpine sh -c "
+>>   apk add --no-cache bind-tools -q &&
+>>   dig @internal-dns-server web-frontend-server.cloud.local +short &&
+>>   dig @internal-dns-server app-backend.cloud.local +short &&
+>>   dig @internal-dns-server minio.cloud.local +short &&
+>>   dig @internal-dns-server keycloak.cloud.local +short 
+>> "
+
+Output: 
+
+10.10.10.10
+
+10.10.10.20
+
+10.10.10.30
+
+10.10.10.40
+
 ## 7. Monitering Note Exporter
 - Open: http://localhost:9090
 - Status → Targets
