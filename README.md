@@ -48,12 +48,11 @@ Run: docker run --rm --network cloud-net alpine sh -c "
 >>   dig @internal-dns-server keycloak.cloud.local +short 
 >> "
 
-Output: 
-
-10.10.10.10
-10.10.10.20
-10.10.10.30
-10.10.10.40
+**Output:** 
+- 10.10.10.10
+- 10.10.10.20
+- 10.10.10.30
+- 10.10.10.40
 
 ## 7. Monitering Note Exporter
 - Open: http://localhost:9090
