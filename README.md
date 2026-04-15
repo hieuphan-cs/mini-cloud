@@ -11,7 +11,7 @@
 - images and link to back to homepage
 - index.html shows list of posts (hyperlink)
 
-## Application Backend Server
+## 2. Application Backend Server
 ### Basic
 **Run:**
 - curl.exe http://localhost:8085/hello --> {"message":"Hello from App Server!"}
@@ -25,7 +25,16 @@
 **Run:** 
 - docker run -it --rm --network cloud-net mysql:8 sh -lc "mysql -h relational-database-server -uroot -proot -e 'USE minicloud; SHOW TABLES; SELECT * FROM notes;'"
 ### Extend
-
+**Run:**:
+- docker exec -it relational-database-server mariadb -u root -proot
+Then MariaDB terminal open
+- SHOW DATABASES;
+- USE studentdb;
+- SELECT * FROM students;
+- INSERT INTO students (student_id, fullname, major) VALUES ('SV100','Demo User','AI');
+- UPDATE students SET gpa = 3.9 WHERE student_id = 'SV100';
+- DELETE FROM students WHERE student_id = 'SV100';
+- 
 ## 4. Authentication Server
 **Open:** http://localhost:8081
 - **Username:** admin / **Password:** admin
