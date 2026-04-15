@@ -51,11 +51,8 @@ Run: docker run --rm --network cloud-net alpine sh -c "
 Output: 
 
 10.10.10.10
-
 10.10.10.20
-
 10.10.10.30
-
 10.10.10.40
 
 ## 7. Monitering Note Exporter
