@@ -34,7 +34,7 @@ Then MariaDB terminal open
 - INSERT INTO students (student_id, fullname, major) VALUES ('SV100','Demo User','AI');
 - UPDATE students SET gpa = 3.9 WHERE student_id = 'SV100';
 - DELETE FROM students WHERE student_id = 'SV100';
-- 
+
 ## 4. Authentication Server
 **Open:** http://localhost:8081
 - **Username:** admin / **Password:** admin
