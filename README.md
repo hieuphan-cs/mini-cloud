@@ -26,9 +26,9 @@
 - docker run -it --rm --network cloud-net mysql:8 sh -lc "mysql -h relational-database-server -uroot -proot -e 'USE minicloud; SHOW TABLES; SELECT * FROM notes;'"
 ### Extend
 
-## 3. Authentication Server
+## 4. Authentication Server
 **Open:** http://localhost:8081
-**Username:** admin / **Password:** admin
+- **Username:** admin / **Password:** admin
 
 ## 5. Object Storage Server (object-storage-server)
 - Open: http://localhost:9001
