@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Students Database</title>
+
+<style>
+
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin:0;
+    background:linear-gradient(180deg,#f5f5f7,#e9e9ee);
+    color:#1d1d1f;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:60px 20px;
+}
+
+.header{
+    margin-bottom:35px;
+}
+
+.title{
+    font-size:34px;
+    font-weight:600;
+    letter-spacing:-0.5px;
+}
+
+.subtitle{
+    margin-top:8px;
+    color:#6e6e73;
+    font-size:15px;
+}
+
+.card{
+    background:rgba(255,255,255,0.75);
+    backdrop-filter: blur(12px);
+    border-radius:18px;
+    box-shadow:0 10px 35px rgba(0,0,0,0.08);
+    overflow:hidden;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:rgba(0,0,0,0.03);
+}
+
+th{
+    text-align:left;
+    font-size:13px;
+    font-weight:600;
+    color:#6e6e73;
+    padding:16px 22px;
+    letter-spacing:0.3px;
+}
+
+td{
+    padding:18px 22px;
+    font-size:15px;
+}
+
+tbody tr{
+    border-top:1px solid #eee;
+    transition:all .2s ease;
+}
+
+tbody tr:hover{
+    background:#fafafa;
+    transform:scale(1.01);
+}
+
+.id{
+    color:#6e6e73;
+    font-size:14px;
+}
+
+.major{
+    background:#f2f2f7;
+    padding:6px 12px;
+    border-radius:999px;
+    font-size:13px;
+    display:inline-block;
+}
+
+.footer{
+    text-align:center;
+    margin-top:30px;
+    font-size:13px;
+    color:#8e8e93;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+<div class="title">Students</div>
+<div class="subtitle">Connected to MariaDB • {{ count }} records</div>
+</div>
+
+<div class="card">
+
+<table>
+
+<thead>
+<tr>
+<th>ID</th>
+<th>Student ID</th>
+<th>Full Name</th>
+<th>Date of Birth</th>
+<th>Major</th>
+</tr>
+</thead>
+
+<tbody>
+
+{% for s in students %}
+<tr>
+<td class="id">{{ s.id }}</td>
+<td>{{ s.student_id }}</td>
+<td>{{ s.fullname }}</td>
+<td>{{ s.dob }}</td>
+<td><span class="major">{{ s.major }}</span></td>
+</tr>
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="footer">
+MiniCloud Demo • Flask API • MariaDB
+</div>
+
+</div>
+
+</body>
+</html>
