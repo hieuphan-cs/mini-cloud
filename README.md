@@ -61,11 +61,14 @@ Write-Host "$ACCESS_TOKEN"
 
 curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS_TOKEN"
 
-## 5. Object Storage Server (object-storage-server)
+## 5. Object Storage Server
+### Basic
 - Open: http://localhost:9001
 - Login: Đăng nhập: minioadmin / minioadmin
 - Create bucket which named "demo"
 - Upload index.html from web-frontend-server
+### Extend
+
 
 ## 6. Internal DNS Server
 **Run:** docker run --rm --network cloud-net alpine sh -c "
