@@ -47,19 +47,19 @@ Create Realm named realm_sv001:
 - create client (flask-app)
 <pre>
 $tokenResponse = Invoke-RestMethod -Uri "http://localhost:8081/realms/realm_sv001/protocol/openid-connect/token" `
->>     -Method Post `
->>     -ContentType "application/x-www-form-urlencoded" `
->>     -Body @{
->>         client_id  = "flask-app"
->>         grant_type = "password"
->>         username   = "sv01"
->>         password   = "123456" # Mật khẩu bạn đã đặt
->>     }
->> $ACCESS_TOKEN = $tokenResponse.access_token
->> Write-Host "$ACCESS_TOKEN"
+    -Method Post `
+    -ContentType "application/x-www-form-urlencoded" `
+    -Body @{
+        client_id  = "flask-app"
+        grant_type = "password"
+        username   = "sv01"
+        password   = "123456" # Mật khẩu bạn đã đặt
+   }
+$ACCESS_TOKEN = $tokenResponse.access_token
+Write-Host "$ACCESS_TOKEN"
 </pre>
 
->> curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS_TOKEN"
+curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS_TOKEN"
 
 ## 5. Object Storage Server (object-storage-server)
 - Open: http://localhost:9001
