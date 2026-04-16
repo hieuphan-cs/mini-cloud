@@ -45,7 +45,7 @@ Then MariaDB terminal open
 Create Realm named realm_sv001:
 - create 2 user (sv01, sv02)
 - create client (flask-app)
-- $tokenResponse = Invoke-RestMethod -Uri "http://localhost:8081/realms/realm_sv001/protocol/openid-connect/token" `
+>> $tokenResponse = Invoke-RestMethod -Uri "http://localhost:8081/realms/realm_sv001/protocol/openid-connect/token" `
 >>     -Method Post `
 >>     -ContentType "application/x-www-form-urlencoded" `
 >>     -Body @{
@@ -56,7 +56,8 @@ Create Realm named realm_sv001:
 >>     }
 >> $ACCESS_TOKEN = $tokenResponse.access_token
 >> Write-Host "$ACCESS_TOKEN"
-- curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS_TOKEN"
+
+>> curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS_TOKEN"
 
 ## 5. Object Storage Server (object-storage-server)
 - Open: http://localhost:9001
