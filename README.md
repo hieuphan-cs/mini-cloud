@@ -85,6 +85,8 @@ curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS
 - 10.10.10.40
 
 ## 7. Monitering Note Exporter
+### Localhost Demo
+#### Basic
 - Open: http://localhost:9090
 - Status → Targets
  Kiểm tra: monitoring-node-exporter-server:9100 phải UP
@@ -92,7 +94,7 @@ curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS
  node_cpu_seconds_total
 8️ Monitoring Grafana Dashboard
 
-
+## 8. Grafana Dashboard
 
 # Additional Information
 Authors: hieu_phan, ntkn-gulu
