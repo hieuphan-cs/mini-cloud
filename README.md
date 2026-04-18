@@ -89,10 +89,24 @@ curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS
 #### Basic
 - Open: http://localhost:9090
 - Status → Targets
- Kiểm tra: monitoring-node-exporter-server:9100 phải UP
- Trong tab “Graph”, thử truy vấn:
- node_cpu_seconds_total
-8️ Monitoring Grafana Dashboard
+**Outcome:**
+- monitoring-node-exporter-server:9100 status: UP
+**“Graph”** tab, trace:
+- node_cpu_seconds_total
+#### Extend
+**Outcome:**
+- web-frontend-server:80 status: UP
+### EC2 Demo
+#### Basic
+- Open: http://public_ip:9090
+- Status → Targets
+**Outcome:**
+- monitoring-node-exporter-server:9100 status: UP
+**“Graph”** tab, trace:
+- node_cpu_seconds_total
+#### Extend
+**Outcome:**
+- web-frontend-server:80 status: UP
 
 ## 8. Grafana Dashboard
 
