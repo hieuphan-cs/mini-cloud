@@ -106,6 +106,9 @@ Authors: hieu_phan, ntkn-gulu
 
 
 <pre>
+    docker exec -it authentication-identity-server bash
+    /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080 --realm master --user admin --password admin
+    /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
     zip -r update.zip . 
     scp -i "<đường_dẫn_đến_file_key.pem>" update.zip ubuntu@<IP_PUBLIC_EC2>:~/
     ssh -i "<đường_dẫn_đến_file_key.pem>" ubuntu@<IP_PUBLIC_EC2>
