@@ -103,3 +103,14 @@ curl.exe -X GET "http://localhost:8085/secure" -H "Authorization: Bearer $ACCESS
 
 # Additional Information
 Authors: hieu_phan, ntkn-gulu
+
+
+<pre>
+    zip -r update.zip . 
+    scp -i "<đường_dẫn_đến_file_key.pem>" update.zip ubuntu@<IP_PUBLIC_EC2>:~/
+    ssh -i "<đường_dẫn_đến_file_key.pem>" ubuntu@<IP_PUBLIC_EC2>
+    sudo apt install unzip -y
+    unzip -o update.zip
+    docker rm -f $(docker ps -aq)
+    export PUBLIC_IP="<IP_PUBLIC_EC2_CỦA_BẠN>" && docker compose down && docker compose up -d --build
+</pre>
